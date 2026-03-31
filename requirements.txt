@@ -1,4 +1,9 @@
-transformers
-sentence-transformers
+pandas
+numpy
 scikit-learn
+transformers
+datasets
+sacrebleu
+bert-score
+matplotlib
 torch
