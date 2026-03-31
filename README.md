@@ -36,3 +36,7 @@ All experiments use pretrained models. No training or fine-tuning is performed.
 ## Disclaimer
 
 This repository contains a simplified and clean version of the experimental pipeline aligned with the published study. Earlier exploratory experiments (including model training) are not included.
+
+## License
+
+This project is licensed under the MIT License.
