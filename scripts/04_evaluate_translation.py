@@ -18,10 +18,7 @@ from transformers import MarianMTModel, MarianTokenizer
 from sacrebleu import corpus_bleu
 from bert_score import score as bert_score
 
-
-# ==============================
 # 1. Setup paths (reproducible)
-# ==============================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DATA_PATH = os.path.join(
@@ -31,10 +28,7 @@ DATA_PATH = os.path.join(
     "chichewa_parallel_corpus_clean_filtered.csv"
 )
 
-
-# ==============================
 # 2. Load dataset
-# ==============================
 if not os.path.exists(DATA_PATH):
     raise FileNotFoundError(f"Dataset not found at {DATA_PATH}")
 
@@ -52,10 +46,7 @@ MAX_SAMPLES = 100
 chichewa_sentences = chichewa_sentences[:MAX_SAMPLES]
 reference_english = reference_english[:MAX_SAMPLES]
 
-
-# ==============================
 # 3. Load pretrained models
-# ==============================
 print("🔄 Loading pretrained MarianMT models...")
 
 model_ny_en_name = "Helsinki-NLP/opus-mt-ny-en"
@@ -71,10 +62,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_ny_en.to(device)
 model_en_hi.to(device)
 
-
-# ==============================
 # 4. Translation function
-# ==============================
 def translate_batch(texts, tokenizer, model, batch_size=16):
     translations = []
 
@@ -101,9 +89,7 @@ def translate_batch(texts, tokenizer, model, batch_size=16):
     return translations
 
 
-# ==============================
 # 5. Pivot Translation
-# ==============================
 print("🌐 Translating Chichewa → English...")
 predicted_english = translate_batch(
     chichewa_sentences,
@@ -119,9 +105,7 @@ predicted_hindi = translate_batch(
 )
 
 
-# ==============================
 # 6. Evaluation
-# ==============================
 
 # ---- BLEU (English level for reference)
 bleu = corpus_bleu(predicted_english, [reference_english])
