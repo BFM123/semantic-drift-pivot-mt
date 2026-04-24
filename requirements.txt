@@ -8,3 +8,6 @@ bert-score
 matplotlib
 torch
 sentence-transformers
+SentencePiece
+streamlit
+plotly
